@@ -1,0 +1,12 @@
+# -------------------------------------------------------------------------------------------------
+# AREA RSSO Config File
+# 
+# NOTE:
+# In order for the AREA RSSO plugin to locate this necessary file, you will need to specify its path when adding the plugin in pluginsvr_config.xml, using '<userDefined>' element.
+# -------------------------------------------------------------------------------------------------
+
+# todo aperenes implement using of https url here
+# RSSO internal url - HTTP url to RSSO. Use HTTP instead of HTTPS protocol to avoid problems with handshake.
+SSO-SERVICE-URL: http://yars912:8080/rsso
+# uncomment the line below if you find the issue that RSSO authenticated users have no groups because of a bug in some old AR versions (e.g. AR 8.0/8.1)
+ AR-USER-GROUPS-FIX: true

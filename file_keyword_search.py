@@ -15,15 +15,30 @@ def search(in_file, word):
                 print("%d: %s" % (i, l))
 
 
-def replace(in_file, old_word, new_word):
+def replace(in_file, old_word, new_word, line_by_line=True):
+    print("Replacing '{}' with '{}' in '{}'".format(old_word, new_word, in_file))
+
+    pattern = r"\b%s\b"
 
     lst = []
 
     with open(in_file) as f:
-        # lst = [re.sub(r"\b%s\b" % old_word, new_word, l) for l in f]
+        for i, l in enumerate(f):
+            matches = re.search(pattern % old_word, l)
+            line = l
 
-        for l in f:
-            lst.append(re.sub(r"\b%s\b" % old_word, new_word, l))
+            if matches:
+                before = l
+                line = re.sub(pattern % old_word, new_word, before)
+
+                print("\nline {}:".format(i+1))
+                print("<<< {}".format(before.strip("\n")))
+                print(">>> {}".format(line).strip("\n"))
+
+                if line_by_line and raw_input("Would you like to replace?: ").lower() != 'y':
+                    line = before
+
+            lst.append(line)
 
     with open(in_file, "w") as f:
         f.writelines(lst)
@@ -48,12 +63,10 @@ def copy(from_file, to_file, line_by_line=False):
         out_file.close()
 
 if __name__ == "__main__":
-    file_name, keyword = "rsso.cfg", "foo"
+    file_name, keyword = "foo.txt", "foo"
 else:
     script, file_name, keyword = sys.argv
 
 # search(file_name, "yars912")
-# replace(file_name, keyword, "Config")
-# search(file_name, "yars912")
-
-copy("rsso.cfg", "samp.txt")
+replace(file_name, keyword, "bar")
+# copy("rsso.cfg", "samp.txt")

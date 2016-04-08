@@ -51,11 +51,15 @@ class Tree:
                 if self.depth and level >= self.depth:
                     continue
                 elif recurse and os.access(path, os.R_OK):
-                    self.print_tree(
-                            path, show_hidden=show_hidden,
-                            recurse=recurse, level=level + 1)
+                    try:
+                        self.print_tree(
+                                path, show_hidden=show_hidden,
+                                recurse=recurse, level=level + 1)
+                    except PermissionError:
+                        pass
             else:
                 self.files += 1
+
 
 def tree(directory='.', show_hidden=False, recurse=False, line_by_line=False, depth=0):
     if os.path.isfile(directory):

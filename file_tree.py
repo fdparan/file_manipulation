@@ -71,13 +71,14 @@ def tree(directory='.', show_hidden=False, recurse=False, line_by_line=False, de
 
 if __name__ == '__main__':
     try:
-        script, directory, show_hidden, recurse, depth, line_by_line = sys.argv
-        show_hidden = bool(int(show_hidden))
-        recurse = bool(int(recurse))
-        line_by_line = bool(int(line_by_line))
-        depth = int(depth)
+        # script, directory, show_hidden, recurse, depth, line_by_line = sys.argv
+        # show_hidden = bool(int(show_hidden))
+        # recurse = bool(int(recurse))
+        # line_by_line = bool(int(line_by_line))
+        # depth = int(depth)
 
-        tree(directory, show_hidden, recurse, line_by_line, depth)
+        # tree(directory, show_hidden, recurse, line_by_line, depth)
+        tree('..', show_hidden=True, recurse=True)
 
     except ValueError as ve:
         print("file_tree: Invalid argument set")
